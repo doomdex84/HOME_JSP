@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/article/doWrite")
 public class ArticleWriteServlet extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response, Object title, Object body)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 
@@ -42,14 +42,15 @@ public class ArticleWriteServlet extends HttpServlet {
 
 			int id = Integer.parseInt(request.getParameter("id"));
 
-			SecSql sql = SecSql.from("DELETE");
-			sql.append("FROM article");
-			sql.append("WHERE id = ?;", id);
+			SecSql sql = SecSql.from("INSERT");
+			sql.append("INTO article");
+			sql.append("title = CONCAT('제목',SUBSTRING(RAND() * 1000 FROM 1 FOR 2))?;", title);
+			sql.append("`body` = CONCAT('내용',SUBSTRING(RAND() * 1000 FROM 1 FOR 2))?;", body);
 
 			DBUtil.delete(conn, sql);
 
 			response.getWriter()
-					.append(String.format("<script>alert('%d번 글이 삭제됨'); location.replace('list');</script>", id));
+					.append(String.format("<script>alert('%d번 글이 등록됨'); location.replace('list');</script>", id));
 
 		} catch (SQLException e) {
 			System.out.println("에러 1 : " + e);
