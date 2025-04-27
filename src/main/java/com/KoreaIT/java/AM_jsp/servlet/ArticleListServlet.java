@@ -44,16 +44,14 @@ public class ArticleListServlet extends HttpServlet {
 
 
 
-			SecSql sql = SecSql.from("SELECT *");
-			sql.append("FROM article");
-			sql.append("ORDER BY id DESC;");
-//			sql.append("limit start_row, (n-1)*10;");
+			SecSql sql = SecSql.from("SELECT a.id,a.title,a.body");
+			sql.append("FROM article AS a");
+			sql.append("ORDER BY a.id DESC");
+			sql.append("limit 0,10;");
 
 			List<Map<String, Object>> articleRows = DBUtil.selectRows(conn, sql);
 
 			request.setAttribute("articleRows", articleRows);
-
-
 
 			request.getRequestDispatcher("/jsp/article/list.jsp").forward(request, response);
 

@@ -49,7 +49,7 @@ public class ArticleModifyServlet extends HttpServlet {
 			DBUtil.delete(conn, sql);
 
 			response.getWriter()
-					.append(String.format("<script>alert('%d번 글이 삭제됨'); location.replace('list');</script>", id));
+					.append(String.format("<script>alert('%d번 글이 수정됨'); location.replace('list');</script>", id));
 
 		} catch (SQLException e) {
 			System.out.println("에러 1 : " + e);

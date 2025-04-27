@@ -52,7 +52,7 @@ table>thead>tr>th, table>tbody>tr>td {
 		</tbody>
 	</table>
 
-	<div style="cursor: pointer; text-align: center;">
+	<div style="cursor: pointer;">
 	1 2 3 4 5 6 7 8	9 10</div>
 
 	<!-- 
